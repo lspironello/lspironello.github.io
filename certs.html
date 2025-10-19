@@ -3,13 +3,19 @@ title: Certificates
 layout: default
 ---
 <h1>My Certificates</h1>
-<ul>
-{% for cert in site.data.linkedin_certs %}
-  <li>
-    {{ cert.title }} ({{ cert.year }}) - 
-    <a href="{{ cert.pdf_url }}" target="_blank">Open PDF</a> | 
-    <a href="{{ cert.pdf_url }}" download>Download PDF</a> (ID: {{ cert.cert_id }})
-  </li>
+{% for provider in site.data %}
+  {% if provider[0] contains '_certs' %}
+    <h2>{{ provider[0] | replace: '_certs', '' | capitalize }}</h2>
+    <p>{{ (site.data.providers | where: 'provider', provider[0] | replace: '_certs', '') | first | map: 'description' }}</p>
+    <ul>
+    {% for cert in provider[1] %}
+      <li>
+        {{ cert.title }} ({{ cert.year }}) - 
+        <a href="{{ cert.pdf_url }}" target="_blank">Open PDF</a> | 
+        <a href="{{ cert.pdf_url }}" download>Download PDF</a> (ID: {{ cert.cert_id }})
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
 {% endfor %}
-</ul>
-<p>Note: "Open PDF" may prompt a download in some browsers (e.g., Brave). To view inline, configure your browser's PDF settings (e.g., in Brave, go to Settings > Downloads > Uncheck "Always download PDFs").</p>
+<p>Note: "Open PDF" may download instead of opening in some browsers (e.g., Brave). To view inline, go to Brave Settings > Downloads > Enable "Open certain file types automatically after downloading" and ensure PDFs open in Brave's viewer. Alternatively, right-click "Open PDF" and select "Open link in new tab."</p>
