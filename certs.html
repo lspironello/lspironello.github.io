@@ -1,88 +1,38 @@
 ---
 layout: default
-title: Certificates
+title: Certifications
 permalink: /certs/
+pagination:
+  enabled: true
+  per_page: 10
+  sort_reverse: true
+  sort_field: 'completion'
 ---
-<h1>My Certificates</h1>
-<p>Professional development courses from LinkedIn Learning and other providers.</p>
-
-<h2>Search Certificates</h2>
-<input type="text" id="certSearch" placeholder="Search by course title or skill...">
-<select id="skillFilter">
-  <option value="">All Skills</option>
-  {% for skill in site.data.skills %}
-    <option value="{{ skill }}">{{ skill }}</option>
-  {% endfor %}
-</select>
-
-{% for provider in site.data %}
-  {% if provider[0] contains '_certs' %}
-    <h2>{{ provider[0] | replace: '_certs', '' | capitalize }}</h2>
-    <p>Professional development courses from {{ provider[0] | replace: '_certs', '' | capitalize }}</p>
-    {% assign certs = provider[1] %}
-    {% assign page_size = 10 %}
-    {% assign total_pages = certs.size | divided_by: page_size | plus: 1 %}
-    {% for page in (1..total_pages) %}
-      {% assign start_index = page | minus: 1 | times: page_size %}
-      <div class="cert-page" data-page="{{ page }}" {% if page != 1 %}style="display: none;"{% endif %}>
-        <h3>Page {{ page }}</h3>
-        <ul class="cert-list">
-          {% for cert in certs offset:start_index limit:page_size %}
-            <li>
-              <a href="{{ cert.course_url }}">{{ cert.title }}</a> ({{ cert.year }}) - 
-              <a href="{{ cert.pdf_url }}">Open PDF</a> | 
-              <a href="{{ cert.pdf_url }}" download>Download PDF</a> 
-              (ID: {{ cert.cert_id | slice: 0, 8 }}...) 
-              Skills: {{ cert.skills }}
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-    {% endfor %}
-    <div class="pagination">
-      {% for i in (1..total_pages) %}
-        <a href="#" class="page-link" data-page="{{ i }}">Page {{ i }}</a>
-      {% endfor %}
-    </div>
-  {% endif %}
+<h1>Certifications</h1>
+<ul>
+{% for cert in paginator.posts %}
+  <li>
+    <strong>{{ cert.title }}</strong><br>
+    Completion: {{ cert.completion }}<br>
+    Skills: {{ cert.skills }}<br>
+    Cert ID: {{ cert.cert_id }}<br>
+    <a href="{{ cert.course_url }}">View Course</a> | <a href="{{ cert.pdf_url }}">View PDF</a>
+  </li>
 {% endfor %}
+</ul>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('certSearch');
-    const skillFilter = document.getElementById('skillFilter');
-    const certPages = document.querySelectorAll('.cert-page');
-    const pageLinks = document.querySelectorAll('.page-link');
+<!-- Pagination links -->
+<div class="pagination">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path }}">Previous</a>
+  {% else %}
+    <span>Previous</span>
+  {% endif %}
+  <span>Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path }}">Next</a>
+  {% else %}
+    <span>Next</span>
+  {% endif %}
+</div>
 
-    function filterCerts() {
-      const searchText = searchInput.value.toLowerCase();
-      const selectedSkill = skillFilter.value.toLowerCase();
-      certPages.forEach(page => {
-        const certs = page.querySelectorAll('li');
-        let hasVisible = false;
-        certs.forEach(cert => {
-          const title = cert.querySelector('a').textContent.toLowerCase();
-          const skills = cert.textContent.toLowerCase();
-          const matchesSearch = title.includes(searchText) || skills.includes(searchText);
-          const matchesSkill = selectedSkill === '' || skills.includes(selectedSkill);
-          cert.style.display = matchesSearch && matchesSkill ? '' : 'none';
-          if (matchesSearch && matchesSkill) hasVisible = true;
-        });
-        page.style.display = hasVisible ? '' : 'none';
-      });
-    }
-
-    searchInput.addEventListener('input', filterCerts);
-    skillFilter.addEventListener('change', filterCerts);
-
-    pageLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const page = this.getAttribute('data-page');
-        certPages.forEach(p => {
-          p.style.display = p.getAttribute('data-page') === page ? '' : 'none';
-        });
-      });
-    });
-  });
-</script>

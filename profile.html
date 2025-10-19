@@ -14,7 +14,7 @@ permalink: /profile/
 <p><strong>Skills:</strong></p>
 <ul>
 {% for skill in site.data.skills %}
-  <li>{{ skill }}</li>
+  <li>{{ skill | escape }}</li>
 {% endfor %}
 </ul>
 <p><strong>Education & Training:</strong> Extensive LinkedIn Learning (1,700+ courses), DeepLearning.AI specializations.</p>
