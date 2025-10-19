@@ -6,6 +6,7 @@
         "completion": "Feb 27, 2020",
         "duration": "1 hour",
         "skills": "Big Data",
+        "course_url": "https://www.linkedin.com/learning",
         "year": "2020",
         "cert_id": "9ce664072fa052b06d16b1dd475d6673cc4b4fd3c885575908adaad9ab5bcad7",
         "pdf_url": "https://lspironello.github.io/assets/pdfs/CertificateOfCompletion_Learning.Data.Science.Manage.Your.Team.pdf"
@@ -17,6 +18,7 @@
         "completion": "Sep 21, 2023",
         "duration": "5 hour",
         "skills": "Building, Generative, AI, Skills",
+        "course_url": "https://www.linkedin.com/learning",
         "year": "2023",
         "cert_id": "3dcb46f0fe5b02b9deb5fe3208bfdb72150f83e441f1bf1bf54b11bfa9b0d68b",
         "pdf_url": "https://lspironello.github.io/assets/pdfs/CertificateOfCompletion_Building.Generative.AI.Skills.for.Business.Professionals.pdf"
@@ -28,6 +30,7 @@
         "completion": "Apr 10, 2025",
         "duration": "37 min",
         "skills": "Artificial Intelligence for Business Project Risk Project Management",
+        "course_url": "https://www.linkedin.com/learning",
         "year": "2025",
         "cert_id": "119fc7d0ff023e1d263dd94dbe15e934a638a67c29e9b17e18cb3f18533695fa",
         "pdf_url": "https://lspironello.github.io/assets/pdfs/CertificateOfCompletion_AI.for.Project.Management.Managing.Risk.with.Generative.AI.pdf"
@@ -38,7 +41,8 @@
         "title": "course-list-learning-path Building AI Literacy   LinkedIn Learning",
         "completion": "",
         "duration": "",
-        "skills": "course-list-learning-path, Building, AI, Literacy",
+        "skills": "course-list-learning-path, Building, AI, Literacy, LinkedIn",
+        "course_url": "https://www.linkedin.com/learning",
         "year": "Unknown",
         "cert_id": "c05666303457fd762ab9b4d6b6c47467c73bb33c7958e9e71c01576d95e9ec34",
         "pdf_url": "https://lspironello.github.io/assets/pdfs/course-list-learning-path_Building.AI.Literacy._.LinkedIn.Learning.pdf"
@@ -50,6 +54,7 @@
         "completion": "Aug 13, 2024",
         "duration": "33 min",
         "skills": "Design Thinking",
+        "course_url": "https://www.linkedin.com/learning",
         "year": "2024",
         "cert_id": "8a883c3c6e619ddb56640bfa1cacf07b94452aaf192e965c1e2e680d8c30f82b",
         "pdf_url": "https://lspironello.github.io/assets/pdfs/2024-08-13-CertificateOfCompletion_Learning.Design.Thinking.pdf"
@@ -61,6 +66,7 @@
         "completion": "Apr 25, 2024",
         "duration": "5 hour",
         "skills": "for Business",
+        "course_url": "https://www.linkedin.com/learning",
         "year": "2024",
         "cert_id": "992c06fccd2c17e64369d111f2f28491706e835bc46ffca97a2f75960f7414bb",
         "pdf_url": "https://lspironello.github.io/assets/pdfs/2024-04-25-CertificateOfCompletion_Learning-Path_Building.ChatGPT.Skills.for.Business.Professionals.pdf"
@@ -72,6 +78,7 @@
         "completion": "Oct 19, 2025",
         "duration": "25 min",
         "skills": "Strategic Planning Business Strategy",
+        "course_url": "https://www.linkedin.com/learning",
         "year": "2025",
         "cert_id": "34beb77593595a99b9fd46d6a701f4c1f89a003c95d60f5c92c54c843a6f7ecc",
         "pdf_url": "https://lspironello.github.io/assets/pdfs/2025-10-19-CertificateOfCompletion_Managers.Guide.to.Building.a.Strategic.Plan.with.ChatGPT.No.Code.Required.pdf"
@@ -83,6 +90,7 @@
         "completion": "Oct 17, 2025",
         "duration": "6 min",
         "skills": "Performance Motivation Career Development",
+        "course_url": "https://www.linkedin.com/learning",
         "year": "2025",
         "cert_id": "a6e2b79a9fc1f71f3ccaeeef5057efdbc6f418c4427ef499b3ce232c497c31b0",
         "pdf_url": "https://lspironello.github.io/assets/pdfs/2025-10-17-CertificateOfCompletion_Nano.Tips.for.Career.Success.and.Daily.Wins.with.Shade.Zahrai.pdf"
@@ -94,6 +102,7 @@
         "completion": "Oct 17, 2025",
         "duration": "6 min",
         "skills": "Professional Conduct Leadership",
+        "course_url": "https://www.linkedin.com/learning",
         "year": "2025",
         "cert_id": "0f41e65b6c6cafa8c1589d390cf009b8d2fbabc08dfd6152288daaf528ffb631",
         "pdf_url": "https://lspironello.github.io/assets/pdfs/2025-10-17-CertificateOfCompletion_Nano.Tips.for.Leading.Authentically.at.Work.with.Luvvie.Ajayi.Jones.pdf"
@@ -105,6 +114,7 @@
         "completion": "May 09, 2024",
         "duration": "49 min",
         "skills": "How, Keep, Your, Team",
+        "course_url": "https://www.linkedin.com/learning",
         "year": "2024",
         "cert_id": "ab22bd6ffe6fa0a58159e40ac69f238e69ae25723642c07da1ee6341b7c7a88c",
         "pdf_url": "https://lspironello.github.io/assets/pdfs/2025-10-17-CertificateOfCompletio_How.to.Keep.Your.Team.on.the.Bleeding.Edge.of.AI.Innovation.pdf"
