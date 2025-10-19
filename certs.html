@@ -5,7 +5,10 @@ layout: default
 <h1>My Certificates</h1>
 <ul>
 {% for cert in site.data.linkedin_certs %}
-  <li>{{ cert.title }} ({{ cert.year }}) - <a href="{{ cert.pdf_url }}">View PDF</a> (ID: {{ cert.cert_id }})</li>
+  <li>
+    {{ cert.title }} ({{ cert.year }}) - 
+    <a href="{{ cert.pdf_url }}" target="_blank">View in New Tab</a> | 
+    <a href="{{ cert.pdf_url }}" download>Download PDF</a> (ID: {{ cert.cert_id }})
+  </li>
 {% endfor %}
 </ul>
-
