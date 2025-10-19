@@ -1,0 +1,16 @@
+- provider: linkedinlearning
+  label: LinkedIn Learning
+  subdirectory: linkedinlearning
+  description: Professional development courses from LinkedIn Learning
+- provider: udemy
+  label: Udemy
+  subdirectory: udemy
+  description: Online courses from Udemy platform
+- provider: deeplearningai
+  label: DeepLearning.AI
+  subdirectory: deeplearning.ai
+  description: AI and machine learning courses from DeepLearning.AI
+- provider: lynda
+  label: Lynda
+  subdirectory: lynda
+  description: Legacy Lynda.com courses (now part of LinkedIn Learning)
