@@ -1,19 +1,14 @@
 ---
-title: Certificates
 layout: default
+title: Certificates
+permalink: /certs/
 ---
 <h1>My Certificates</h1>
-
-<h2>Skills</h2>
-<ul>
-{% for skill in site.data.skills %}
-  <li>{{ skill }}</li>
-{% endfor %}
-</ul>
+<p>Professional development courses from LinkedIn Learning and other providers.</p>
 
 <h2>Search Certificates</h2>
-<input type="text" id="searchInput" placeholder="Search by title or skill..." style="width: 100%; padding: 8px;">
-<select id="skillFilter" onchange="filterCerts()">
+<input type="text" id="certSearch" placeholder="Search by course title or skill...">
+<select id="skillFilter">
   <option value="">All Skills</option>
   {% for skill in site.data.skills %}
     <option value="{{ skill }}">{{ skill }}</option>
@@ -23,34 +18,78 @@ layout: default
 {% for provider in site.data %}
   {% if provider[0] contains '_certs' %}
     <h2>{{ provider[0] | replace: '_certs', '' | capitalize }}</h2>
-    <p>{{ (site.data.providers | where: 'provider', provider[0] | replace: '_certs', '') | first | map: 'description' }}</p>
-    <ul class="cert-list">
-    {% for cert in provider[1] %}
-      <li data-skills="{{ cert.skills | downcase }}">
-        <a href="{{ cert.course_url }}" target="_blank">{{ cert.title | replace: 'Course completed by', '' | strip }}</a> ({{ cert.year }}) - 
-        <a href="{{ cert.pdf_url }}" target="_blank">Open PDF</a> | 
-        <a href="{{ cert.pdf_url }}" download>Download PDF</a> (ID: {{ cert.cert_id | slice: 0, 8 }}...) 
-        <span class="skills">Skills: {{ cert.skills }}</span>
+    <p>Professional development courses from {{ provider[0] | replace: '_certs', '' | capitalize }}</p>
+    {% assign certs = provider[1] %}
+    {% assign page_size = 10 %}
+    {% assign page = 1 %}
+    {% assign total_pages = certs.size | divided_by: page_size | plus: 1 %}
+    {% for cert in certs %}
+      {% if forloop.index0 | modulo: page_size == 0 %}
+        {% if forloop.index0 != 0 %}
+          </ul>
+        {% endif %}
+        <h3>Page {{ page }}</h3>
+        <ul class="cert-list" data-page="{{ page }}">
+          {% assign page = page | plus: 1 %}
+      {% endif %}
+      <li>
+        <a href="{{ cert.course_url }}">{{ cert.title }}</a> ({{ cert.year }}) - 
+        <a href="{{ cert.pdf_url }}">Open PDF</a> | 
+        <a href="{{ cert.pdf_url }}" download>Download PDF</a> 
+        (ID: {{ cert.cert_id | slice: 0, 8 }}...) 
+        Skills: {{ cert.skills }}
       </li>
+      {% if forloop.last %}
+        </ul>
+      {% endif %}
     {% endfor %}
-    </ul>
+    <div class="pagination">
+      {% for i in (1..total_pages) %}
+        <a href="#" class="page-link" data-page="{{ i }}">Page {{ i }}</a>
+      {% endfor %}
+    </div>
   {% endif %}
 {% endfor %}
 
-<p>Note: "Open PDF" may download instead of opening in some browsers (e.g., Brave). To view inline, go to Brave Settings > Downloads > Enable "Open certain file types automatically after downloading" and ensure PDFs open in Brave's viewer. Alternatively, right-click "Open PDF" and select "Open link in new tab."</p>
-
 <script>
-function filterCerts() {
-  const searchInput = document.getElementById('searchInput').value.toLowerCase();
-  const skillFilter = document.getElementById('skillFilter').value.toLowerCase();
-  const certs = document.querySelectorAll('.cert-list li');
-  certs.forEach(cert => {
-    const title = cert.querySelector('a').textContent.toLowerCase();
-    const skills = cert.getAttribute('data-skills').toLowerCase();
-    const matchesSearch = title.includes(searchInput) || skills.includes(searchInput);
-    const matchesSkill = !skillFilter || skills.includes(skillFilter);
-    cert.style.display = matchesSearch && matchesSkill ? '' : 'none';
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('certSearch');
+    const skillFilter = document.getElementById('skillFilter');
+    const certLists = document.querySelectorAll('.cert-list');
+    const pageLinks = document.querySelectorAll('.page-link');
+
+    function filterCerts() {
+      const searchText = searchInput.value.toLowerCase();
+      const selectedSkill = skillFilter.value.toLowerCase();
+      certLists.forEach(list => {
+        const certs = list.querySelectorAll('li');
+        certs.forEach(cert => {
+          const title = cert.querySelector('a').textContent.toLowerCase();
+          const skills = cert.textContent.toLowerCase();
+          const matchesSearch = title.includes(searchText) || skills.includes(searchText);
+          const matchesSkill = selectedSkill === '' || skills.includes(selectedSkill);
+          cert.style.display = matchesSearch && matchesSkill ? '' : 'none';
+        });
+        list.style.display = Array.from(certs).some(cert => cert.style.display === '') ? '' : 'none';
+      });
+    }
+
+    searchInput.addEventListener('input', filterCerts);
+    skillFilter.addEventListener('change', filterCerts);
+
+    pageLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const page = this.getAttribute('data-page');
+        certLists.forEach(list => {
+          list.style.display = list.getAttribute('data-page') === page ? '' : 'none';
+        });
+      });
+    });
+
+    // Show only the first page initially
+    certLists.forEach(list => {
+      list.style.display = list.getAttribute('data-page') === '1' ? '' : 'none';
+    });
   });
-}
-document.getElementById('searchInput').addEventListener('input', filterCerts);
 </script>

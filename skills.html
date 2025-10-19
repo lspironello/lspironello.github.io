@@ -1,0 +1,12 @@
+---
+layout: default
+title: Skills
+permalink: /skills/
+---
+<h1>Skills</h1>
+<p>Skills acquired from LinkedIn Learning and other certifications.</p>
+<ul>
+{% for skill in site.data.skills %}
+  <li>{{ skill }}</li>
+{% endfor %}
+</ul>
