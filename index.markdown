@@ -3,11 +3,10 @@ layout: default
 title: Home
 ---
 
-<h1>Welcome to lspironello.github.io</h1>
-<p>This site showcases my professional profile, certificates, and projects.</p>
+# Welcome to lspironello.github.io
 
-<ul>
-  <li><a href="https://www.linkedin.com/in/lspironello" target="_blank">LinkedIn Profile</a></li>
-  <li><a href="/profile">Full Profile</a></li>
-  <li><a href="/certs">My Certificates (1,000+)</a></li>
-</ul>
+This site showcases my professional profile, certificates, and projects.
+
+- [LinkedIn Profile](https://www.linkedin.com/in/lspironello)
+- [Full Profile](/profile)
+- [Certificates (1,000+)](/certs)
