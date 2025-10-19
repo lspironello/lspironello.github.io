@@ -10,9 +10,9 @@ layout: default
     <ul>
     {% for cert in provider[1] %}
       <li>
-        {{ cert.title }} ({{ cert.year }}) - 
+        {{ cert.title | replace: 'Course completed by', '' | strip }} ({{ cert.year }}) - 
         <a href="{{ cert.pdf_url }}" target="_blank">Open PDF</a> | 
-        <a href="{{ cert.pdf_url }}" download>Download PDF</a> (ID: {{ cert.cert_id }})
+        <a href="{{ cert.pdf_url }}" download>Download PDF</a> (ID: {{ cert.cert_id | slice: 0, 8 }}...)
       </li>
     {% endfor %}
     </ul>
