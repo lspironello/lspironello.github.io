@@ -1,14 +1,17 @@
 ---
-title: LinkedIn Learning Certificates
+title: Certificates
 layout: default
 ---
 <h1>My Certificates</h1>
-<ul>
-{% for cert in site.data.linkedin_certs %}
-  <li>
-    {{ cert.title }} ({{ cert.year }}) - 
-    <a href="{{ cert.pdf_url }}" target="_blank">View in New Tab</a> | 
-    <a href="{{ cert.pdf_url }}" download>Download PDF</a> (ID: {{ cert.cert_id }})
-  </li>
+{% for provider in site.data %}
+  <h2>{{ provider[0] | replace: '_certs', '' | capitalize }}</h2>
+  <ul>
+  {% for cert in provider[1] %}
+    <li>
+      {{ cert.title }} ({{ cert.year }}) - 
+      <a href="{{ cert.pdf_url }}" target="_blank">View in New Tab</a> | 
+      <a href="{{ cert.pdf_url }}" download>Download PDF</a>
+    </li>
+  {% endfor %}
+  </ul>
 {% endfor %}
-</ul>
