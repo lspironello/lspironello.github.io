@@ -1,0 +1,6 @@
+base_dir: /mnt/syn/public/documents/jobs/certs
+repo: lspironello/lspironello.github.io
+release_tag: certs
+github_page_url: https://lspironello.github.io
+providers_yaml: _data/providers.yml
+data_dir: _data

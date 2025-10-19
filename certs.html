@@ -21,27 +21,23 @@ permalink: /certs/
     <p>Professional development courses from {{ provider[0] | replace: '_certs', '' | capitalize }}</p>
     {% assign certs = provider[1] %}
     {% assign page_size = 10 %}
-    {% assign page = 1 %}
     {% assign total_pages = certs.size | divided_by: page_size | plus: 1 %}
-    {% for cert in certs %}
-      {% if forloop.index0 | modulo: page_size == 0 %}
-        {% if forloop.index0 != 0 %}
-          </ul>
-        {% endif %}
+    {% for page in (1..total_pages) %}
+      {% assign start_index = page | minus: 1 | times: page_size %}
+      <div class="cert-page" data-page="{{ page }}" {% if page != 1 %}style="display: none;"{% endif %}>
         <h3>Page {{ page }}</h3>
-        <ul class="cert-list" data-page="{{ page }}">
-          {% assign page = page | plus: 1 %}
-      {% endif %}
-      <li>
-        <a href="{{ cert.course_url }}">{{ cert.title }}</a> ({{ cert.year }}) - 
-        <a href="{{ cert.pdf_url }}">Open PDF</a> | 
-        <a href="{{ cert.pdf_url }}" download>Download PDF</a> 
-        (ID: {{ cert.cert_id | slice: 0, 8 }}...) 
-        Skills: {{ cert.skills }}
-      </li>
-      {% if forloop.last %}
+        <ul class="cert-list">
+          {% for cert in certs offset:start_index limit:page_size %}
+            <li>
+              <a href="{{ cert.course_url }}">{{ cert.title }}</a> ({{ cert.year }}) - 
+              <a href="{{ cert.pdf_url }}">Open PDF</a> | 
+              <a href="{{ cert.pdf_url }}" download>Download PDF</a> 
+              (ID: {{ cert.cert_id | slice: 0, 8 }}...) 
+              Skills: {{ cert.skills }}
+            </li>
+          {% endfor %}
         </ul>
-      {% endif %}
+      </div>
     {% endfor %}
     <div class="pagination">
       {% for i in (1..total_pages) %}
@@ -55,22 +51,24 @@ permalink: /certs/
   document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('certSearch');
     const skillFilter = document.getElementById('skillFilter');
-    const certLists = document.querySelectorAll('.cert-list');
+    const certPages = document.querySelectorAll('.cert-page');
     const pageLinks = document.querySelectorAll('.page-link');
 
     function filterCerts() {
       const searchText = searchInput.value.toLowerCase();
       const selectedSkill = skillFilter.value.toLowerCase();
-      certLists.forEach(list => {
-        const certs = list.querySelectorAll('li');
+      certPages.forEach(page => {
+        const certs = page.querySelectorAll('li');
+        let hasVisible = false;
         certs.forEach(cert => {
           const title = cert.querySelector('a').textContent.toLowerCase();
           const skills = cert.textContent.toLowerCase();
           const matchesSearch = title.includes(searchText) || skills.includes(searchText);
           const matchesSkill = selectedSkill === '' || skills.includes(selectedSkill);
           cert.style.display = matchesSearch && matchesSkill ? '' : 'none';
+          if (matchesSearch && matchesSkill) hasVisible = true;
         });
-        list.style.display = Array.from(certs).some(cert => cert.style.display === '') ? '' : 'none';
+        page.style.display = hasVisible ? '' : 'none';
       });
     }
 
@@ -81,15 +79,10 @@ permalink: /certs/
       link.addEventListener('click', function(e) {
         e.preventDefault();
         const page = this.getAttribute('data-page');
-        certLists.forEach(list => {
-          list.style.display = list.getAttribute('data-page') === page ? '' : 'none';
+        certPages.forEach(p => {
+          p.style.display = p.getAttribute('data-page') === page ? '' : 'none';
         });
       });
-    });
-
-    // Show only the first page initially
-    certLists.forEach(list => {
-      list.style.display = list.getAttribute('data-page') === '1' ? '' : 'none';
     });
   });
 </script>
