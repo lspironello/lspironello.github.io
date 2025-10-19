@@ -3,15 +3,13 @@ title: Certificates
 layout: default
 ---
 <h1>My Certificates</h1>
-{% for provider in site.data %}
-  <h2>{{ provider[0] | replace: '_certs', '' | capitalize }}</h2>
-  <ul>
-  {% for cert in provider[1] %}
-    <li>
-      {{ cert.title }} ({{ cert.year }}) - 
-      <a href="{{ cert.pdf_url }}" target="_blank">View in New Tab</a> | 
-      <a href="{{ cert.pdf_url }}" download>Download PDF</a>
-    </li>
-  {% endfor %}
-  </ul>
+<ul>
+{% for cert in site.data.linkedin_certs %}
+  <li>
+    {{ cert.title }} ({{ cert.year }}) - 
+    <a href="{{ cert.pdf_url }}" target="_blank">Open PDF</a> | 
+    <a href="{{ cert.pdf_url }}" download>Download PDF</a> (ID: {{ cert.cert_id }})
+  </li>
 {% endfor %}
+</ul>
+<p>Note: "Open PDF" may prompt a download in some browsers (e.g., Brave). To view inline, configure your browser's PDF settings (e.g., in Brave, go to Settings > Downloads > Uncheck "Always download PDFs").</p>
