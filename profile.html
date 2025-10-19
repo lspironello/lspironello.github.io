@@ -11,9 +11,15 @@ layout: default
 <h2>Key Experience & Skills</h2>
 <ul>
   <li><strong>Current Focus:</strong> AI Product Security, Secure Architecture, Deployment, and Infrastructure.</li>
-  <li><strong>Skills:</strong> Python, Machine Learning, Data Science, Cybersecurity, Project Management, Generative AI, Design Thinking.</li>
+  <li><strong>Skills:</strong>
+    <ul>
+    {% for skill in site.data.skills %}
+      <li>{{ skill }}</li>
+    {% endfor %}
+    </ul>
+  </li>
   <li><strong>Education & Training:</strong> Extensive LinkedIn Learning (1,700+ courses), DeepLearning.AI specializations.</li>
-  <li><strong>Location:</strong> [Add your location, e.g., Remote/Available Globally].</li>
+  <li><strong>Location:</strong> Remote/Available Globally</li>
 </ul>
 
 <h2>Certifications</h2>
