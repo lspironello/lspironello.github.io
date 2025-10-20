@@ -1,0 +1,1 @@
+Large Language Models on AWS: Building and Deploying Open-Source LLMs Course completed by Oct 01, 2025 at 09:08PM UTC • 35 minutes Top skills covered Large Language Models (LLM) Artificial Intelligence (AI) Amazon Web Services (AWS) Shea Hanson, Head of Learning Content Strategy Certificate ID: 34b034dc58355c243a12405f37df21b321b5e361619ed707a25d2384d7f532dc

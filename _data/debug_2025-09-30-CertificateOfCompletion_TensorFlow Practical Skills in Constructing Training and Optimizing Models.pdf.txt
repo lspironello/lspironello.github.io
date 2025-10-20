@@ -1,0 +1,1 @@
+TensorFlow: Practical Skills in Constructing, Training, and Optimizing Models Course completed by Sep 30, 2025 at 10:13AM UTC • 38 minutes Top skills covered Neural Networks Machine Learning TensorFlow Shea Hanson, Head of Learning Content Strategy Certificate ID: 2751f7d3793516172fab6024dc7dd705f467508badeedc78c5d413906e6a81e9
