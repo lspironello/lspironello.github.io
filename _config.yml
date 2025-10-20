@@ -1,8 +1,5 @@
-title: lspironello.github.io
-description: My GitHub Pages site
-theme: jekyll-theme-minimal  # Or 'minima' if preferred
-plugins:
-  - jekyll-feed
-exclude:
-  - Gemfile
-  - Gemfile.lock
+gems:
+  - jekyll-paginate
+paginate: 10
+paginate_path: "/certs/page:num/"
+

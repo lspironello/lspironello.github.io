@@ -2,15 +2,15 @@
 layout: default
 title: Certifications
 permalink: /certs/
-pagination:
-  enabled: true
-  per_page: 10
-  sort_reverse: true
-  sort_field: 'completion'
 ---
 <h1>Certifications</h1>
 <ul>
-{% for cert in paginator.posts %}
+{% assign certs = site.data.linkedinlearning_certs | sort: 'completion' | reverse %}
+{% assign per_page = 10 %}
+{% assign page = site.paginate | default: 1 %}
+{% assign start_index = page | minus: 1 | times: per_page %}
+{% assign end_index = start_index | plus: per_page %}
+{% for cert in certs | slice: start_index, per_page %}
   <li>
     <strong>{{ cert.title }}</strong><br>
     Completion: {{ cert.completion }}<br>
@@ -22,15 +22,16 @@ pagination:
 </ul>
 
 <!-- Pagination links -->
+{% assign total_pages = certs.size | divided_by: per_page | plus: 1 %}
 <div class="pagination">
-  {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path }}">Previous</a>
+  {% if page > 1 %}
+    <a href="/certs/?page={{ page | minus: 1 }}">Previous</a>
   {% else %}
     <span>Previous</span>
   {% endif %}
-  <span>Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
-  {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path }}">Next</a>
+  <span>Page: {{ page }} of {{ total_pages }}</span>
+  {% if end_index < certs.size %}
+    <a href="/certs/?page={{ page | plus: 1 }}">Next</a>
   {% else %}
     <span>Next</span>
   {% endif %}
