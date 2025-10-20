@@ -8,13 +8,13 @@ permalink: /certs/
 
 <h2>Search Certificates</h2>
 <input type="text" id="searchInput" placeholder="Search by title or skill..." style="width: 100%; padding: 8px;">
-<select id="skillFilter" onchange="filterCerts()">
+<select id="skillFilter" onchange="filterAndPaginateCerts()">
   <option value="">All Skills</option>
   {% for skill in site.data.skills %}
     <option value="{{ skill }}">{{ skill }}</option>
   {% endfor %}
 </select>
-<select id="yearFilter" onchange="filterCerts()">
+<select id="yearFilter" onchange="filterAndPaginateCerts()">
   <option value="">All Years</option>
   {% assign years = site.data.linkedinlearning_certs | group_by: 'year' | sort: 'name' | reverse %}
   {% for year_group in years %}
@@ -23,27 +23,15 @@ permalink: /certs/
 </select>
 
 <!-- Top Pagination -->
-<div class="pagination">
-  {% if page > 1 %}
-    <a href="/certs/?page={{ page | minus: 1 }}">Previous</a>
-  {% else %}
-    <span>Previous</span>
-  {% endif %}
-  <span>Page: {{ page }} of {{ total_pages }}</span>
-  {% if end_index < certs.size %}
-    <a href="/certs/?page={{ page | plus: 1 }}">Next</a>
-  {% else %}
-    <span>Next</span>
-  {% endif %}
-</div>
+<div class="pagination" id="topPagination"></div>
 
 {% for provider in site.data %}
   {% if provider[0] contains '_certs' %}
     <h2>{{ provider[0] | replace: '_certs', '' | capitalize }}</h2>
     <p>{{ (site.data.providers | where: 'provider', provider[0] | replace: '_certs', '') | first | map: 'description' }}</p>
-    <ul class="cert-list">
-    {% for cert in provider[1] | slice: start_index, page_size %}
-      <li>
+    <ul class="cert-list" id="certList">
+    {% for cert in provider[1] %}
+      <li data-title="{{ cert.title | downcase }}" data-skills="{{ cert.skills | downcase }}" data-year="{{ cert.year | downcase }}">
         <strong>{{ cert.title | replace: 'Course completed by', '' | strip }}</strong><br>
         Completion: {{ cert.completion }}<br>
         Skills: {{ cert.skills }}<br>
@@ -56,37 +44,92 @@ permalink: /certs/
 {% endfor %}
 
 <!-- Bottom Pagination -->
-<div class="pagination">
-  {% if page > 1 %}
-    <a href="/certs/?page={{ page | minus: 1 }}">Previous</a>
-  {% else %}
-    <span>Previous</span>
-  {% endif %}
-  <span>Page: {{ page }} of {{ total_pages }}</span>
-  {% if end_index < certs.size %}
-    <a href="/certs/?page={{ page | plus: 1 }}">Next</a>
-  {% else %}
-    <span>Next</span>
-  {% endif %}
-</div>
+<div class="pagination" id="bottomPagination"></div>
 
 <script>
+const perPage = 10;
+
+// Get current page from URL query param (default to 1)
+function getCurrentPage() {
+  const urlParams = new URLSearchParams(window.location.search);
+  return parseInt(urlParams.get('page')) || 1;
+}
+
+// Update URL with new page without reloading
+function updateUrl(page) {
+  const url = new URL(window.location);
+  url.searchParams.set('page', page);
+  window.history.pushState({}, '', url);
+}
+
+// Filter certs based on search, skill, and year
 function filterCerts() {
   const searchInput = document.getElementById('searchInput').value.toLowerCase();
   const skillFilter = document.getElementById('skillFilter').value.toLowerCase();
   const yearFilter = document.getElementById('yearFilter').value.toLowerCase();
   const certs = document.querySelectorAll('.cert-list li');
+  let visibleCerts = [];
   certs.forEach(cert => {
-    const title = cert.querySelector('strong').textContent.toLowerCase();
-    const skills = cert.textContent.toLowerCase();
-    const year = cert.textContent.toLowerCase();
+    const title = cert.dataset.title;
+    const skills = cert.dataset.skills;
+    const year = cert.dataset.year;
     const matchesSearch = title.includes(searchInput) || skills.includes(searchInput);
     const matchesSkill = !skillFilter || skills.includes(skillFilter);
     const matchesYear = !yearFilter || year.includes(yearFilter);
-    cert.style.display = matchesSearch && matchesSkill && matchesYear ? '' : 'none';
+    if (matchesSearch && matchesSkill && matchesYear) {
+      visibleCerts.push(cert);
+      cert.style.display = '';
+    } else {
+      cert.style.display = 'none';
+    }
   });
+  return visibleCerts;
 }
-document.getElementById('searchInput').addEventListener('input', filterCerts);
-document.getElementById('skillFilter').addEventListener('change', filterCerts);
-document.getElementById('yearFilter').addEventListener('change', filterCerts);
+
+// Paginate the visible certs
+function paginateCerts(visibleCerts, currentPage) {
+  const totalCerts = visibleCerts.length;
+  const totalPages = Math.ceil(totalCerts / perPage);
+  const startIndex = (currentPage - 1) * perPage;
+  const endIndex = startIndex + perPage;
+
+  // Hide all, then show only the current page's
+  visibleCerts.forEach((cert, index) => {
+    cert.style.display = (index >= startIndex && index < endIndex) ? '' : 'none';
+  });
+
+  // Update pagination HTML
+  const paginationHtml = `
+    ${currentPage > 1 ? `<a href="?page=${currentPage - 1}" onclick="handlePageChange(${currentPage - 1}); return false;">Previous</a>` : '<span>Previous</span>'}
+    <span>Page: ${currentPage} of ${totalPages}</span>
+    ${endIndex < totalCerts ? `<a href="?page=${currentPage + 1}" onclick="handlePageChange(${currentPage + 1}); return false;">Next</a>` : '<span>Next</span>'}
+  `;
+  document.getElementById('topPagination').innerHTML = paginationHtml;
+  document.getElementById('bottomPagination').innerHTML = paginationHtml;
+
+  return totalPages;
+}
+
+// Handle page change without reload
+function handlePageChange(newPage) {
+  updateUrl(newPage);
+  filterAndPaginateCerts();
+}
+
+// Combined filter and paginate
+function filterAndPaginateCerts() {
+  const visibleCerts = filterCerts();
+  const currentPage = getCurrentPage();
+  paginateCerts(visibleCerts, currentPage);
+}
+
+// Initial load
+window.addEventListener('load', filterAndPaginateCerts);
+document.getElementById('searchInput').addEventListener('input', filterAndPaginateCerts);
+document.getElementById('skillFilter').addEventListener('change', filterAndPaginateCerts);
+document.getElementById('yearFilter').addEventListener('change', filterAndPaginateCerts);
+
+// Handle browser back/forward
+window.addEventListener('popstate', filterAndPaginateCerts);
 </script>
+
