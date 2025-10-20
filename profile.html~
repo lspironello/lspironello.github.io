@@ -1,0 +1,24 @@
+---
+layout: default
+title: Professional Profile
+permalink: /profile/
+---
+<h1>Professional Profile</h1>
+<p><a href="https://www.linkedin.com/in/lspironello">View Full LinkedIn Profile</a></p>
+
+<h2>Summary</h2>
+<p>L. Spirone llo is a dedicated tech professional with a strong background in computer security, machine learning, data science, and AI. With over 1,700 LinkedIn Learning courses completed, including all DeepLearning.AI short courses, L. focuses on upskilling for roles in Data Analysis, Junior Data Science, Machine Learning Engineering, and Cybersecurity. Passionate about remote/freelance opportunities and building a virtual network through platforms like Upwork and GitHub.</p>
+
+<h2>Key Experience & Skills</h2>
+<p><strong>Current Focus:</strong> AI Product Security, Secure Architecture, Deployment, and Infrastructure.</p>
+<p><strong>Skills:</strong></p>
+<ul>
+{% for skill in site.data.skills %}
+  <li>{{ skill | escape }}</li>
+{% endfor %}
+</ul>
+<p><strong>Education & Training:</strong> Extensive LinkedIn Learning (1,700+ courses), DeepLearning.AI specializations.</p>
+<p><strong>Location:</strong> Remote/Available Globally</p>
+
+<h2>Certifications</h2>
+<p><a href="/certs">View All Certificates</a> (1,000+ from LinkedIn Learning, Udemy, DeepLearning.AI, and Lynda).</p>

@@ -1,0 +1,38 @@
+---
+layout: default
+title: Courses
+permalink: /courses/
+---
+<h1>Courses</h1>
+<p>A list of courses from LinkedIn Learning and other providers.</p>
+
+<ul>
+{% assign courses = site.data.linkedinlearning_certs | sort: 'title' %}
+{% assign per_page = 10 %}
+{% assign page = site.paginate | default: 1 %}
+{% assign start_index = page | minus: 1 | times: per_page %}
+{% assign end_index = start_index | plus: per_page %}
+{% for cert in courses | slice: start_index, per_page %}
+  <li>
+    <strong>{{ cert.title }}</strong><br>
+    <a href="{{ cert.course_url }}" target="_blank">View Course</a>
+  </li>
+{% endfor %}
+</ul>
+
+<!-- Pagination links -->
+{% assign total_pages = courses.size | divided_by: per_page | plus: 1 %}
+<div class="pagination">
+  {% if page > 1 %}
+    <a href="/courses/?page={{ page | minus: 1 }}">Previous</a>
+  {% else %}
+    <span>Previous</span>
+  {% endif %}
+  <span>Page: {{ page }} of {{ total_pages }}</span>
+  {% if end_index < courses.size %}
+    <a href="/courses/?page={{ page | plus: 1 }}">Next</a>
+  {% else %}
+    <span>Next</span>
+  {% endif %}
+</div>
+
