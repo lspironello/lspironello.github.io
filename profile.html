@@ -13,13 +13,9 @@ permalink: /profile/
 <p><strong>Current Focus:</strong> AI Product Security, Secure Architecture, Deployment, and Infrastructure.</p>
 <p><strong>Skills:</strong></p>
 <ul>
-{% if site.data.skills %}
-  {% for skill in site.data.skills %}
-    <li>{{ skill | escape }}</li>
-  {% endfor %}
-{% else %}
-  <li>No skills available</li>
-{% endif %}
+{% for skill in site.data.skills %}
+  <li>{{ skill | escape }}</li>
+{% endfor %}
 </ul>
 <p><strong>Education & Training:</strong> Extensive LinkedIn Learning (1,700+ courses), DeepLearning.AI specializations.</p>
 <p><strong>Location:</strong> Remote/Available Globally</p>
