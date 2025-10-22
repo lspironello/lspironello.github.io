@@ -8,7 +8,7 @@
   description: Online courses from Udemy platform
 - provider: deeplearningai
   label: DeepLearning.AI
-  subdirectory: deeplearning.ai
+  subdirectory: deeplearning-ai
   description: AI and machine learning courses from DeepLearning.AI
 - provider: lynda
   label: Lynda

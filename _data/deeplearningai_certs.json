@@ -1,0 +1,44 @@
+[
+    {
+        "title": "Evaluating and Debuging Generative AI",
+        "completion": "2024-01-01",
+        "skills": "",
+        "year": "2024",
+        "cert_id": "e5a7c6b2",
+        "instructors": [
+            "DeepLearning.AI"
+        ],
+        "cert_url": "",
+        "course_url": "",
+        "pdf_url": "https://lspironello.github.io/assets/pdfs/2024-01-01-Lou%20Spironello%2C%20congratulations%20on%20completing%20Evaluating%20and%20Debugging%20Generative%20AI%21.pdf",
+        "provider": "deeplearningai"
+    },
+    {
+        "title": "Functions, Tols and Agents with LangChain",
+        "completion": "2024-01-01",
+        "skills": "",
+        "year": "2024",
+        "cert_id": "7a2b3a29",
+        "instructors": [
+            "DeepLearning.AI"
+        ],
+        "cert_url": "",
+        "course_url": "",
+        "pdf_url": "https://lspironello.github.io/assets/pdfs/2024-01-01-Lou%20Spironello%2C%20congratulations%20on%20completing%20Functions%2C%20Tools%20and%20Agents%20with%20LangChain%21.pdf",
+        "provider": "deeplearningai"
+    },
+    {
+        "title": "How Busines Thinkers Can Start Building AI Plugins With Semantic Kernel",
+        "completion": "2024-01-01",
+        "skills": "",
+        "year": "2024",
+        "cert_id": "7d73b5eb",
+        "instructors": [
+            "DeepLearning.AI"
+        ],
+        "cert_url": "",
+        "course_url": "",
+        "pdf_url": "https://lspironello.github.io/assets/pdfs/2024-01-01-Lou%20Spironello%2C%20congratulations%20on%20completing%20How%20Business%20Thinkers%20Can%20Start%20Building%20AI%20Plugins%20With%20Semantic%20Kernel%21.pdf",
+        "provider": "deeplearningai"
+    }
+]
