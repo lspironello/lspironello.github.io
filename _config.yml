@@ -1,5 +1,9 @@
 plugins:
   - jekyll-paginate
-
 paginate: 10
 paginate_path: "/certs/page:num/"
+timezone: America/New_York
+include:
+  - assets
+  - assets/pdfs
+
