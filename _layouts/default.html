@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: site.title }}</title>
-    <!-- Add any existing head content from your theme here -->
+    <!-- Add any existing head content here -->
 </head>
 <body>
     {{ content }}
-<footer style="text-align: center; padding: 10px; font-size: 0.8em; color: #666;">
-    <p>Last updated: {{ site.time | date: "%I:%M %p %Z on %A, %B %d, %Y" }}</p>
-</footer>
+    <footer style="text-align: center; padding: 10px; font-size: 0.8em; color: #666;">
+        <p>Last updated: <span id="last-updated"></span></p>
+    </footer>
     <script>
         function updateTimestamp() {
             const now = new Date();
