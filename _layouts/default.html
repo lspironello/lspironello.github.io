@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: site.title }}</title>
+    <!-- Add any existing head content from your theme here -->
+</head>
+<body>
+    {{ content }}
+    <footer style="text-align: center; padding: 10px; font-size: 0.8em; color: #666;">
+        <p>Last updated: <span id="last-updated"></span></p>
+    </footer>
+    <script>
+        function updateTimestamp() {
+            const now = new Date();
+            const options = { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                timeZoneName: 'short', 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                timeZone: 'America/New_York' // Set to EDT
+            };
+            document.getElementById('last-updated').textContent = now.toLocaleString('en-US', options);
+        }
+        updateTimestamp();
+    </script>
+</body>
+</html>
+
+
