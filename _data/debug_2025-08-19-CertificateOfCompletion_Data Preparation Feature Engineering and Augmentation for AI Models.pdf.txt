@@ -1,1 +1,0 @@
-Data Preparation, Feature Engineering, and Augmentation for AI Models Course completed by Aug 19, 2025 at 08:54PM UTC • 1 hour 48 minutes Top skills covered Retrieval-Augmented Generation (RAG) Artificial Intelligence (AI) Data Preparation Shea Hanson, Head of Learning Content Strategy Certificate ID: 3ab4943dc6776c2ee1dc12264e6213606c074ed452a2dc5ead737a4ead0eabcd

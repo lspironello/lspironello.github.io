@@ -14,3 +14,7 @@
   label: Lynda
   subdirectory: lynda
   description: Legacy Lynda.com courses (now part of LinkedIn Learning)
+- provider: cybrary
+  label: Cybrary
+  subdirectory: cybrary
+  description: Cybrary courses
