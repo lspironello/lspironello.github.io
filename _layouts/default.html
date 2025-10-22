@@ -8,9 +8,9 @@
 </head>
 <body>
     {{ content }}
-    <footer style="text-align: center; padding: 10px; font-size: 0.8em; color: #666;">
-        <p>Last updated: <span id="last-updated"></span></p>
-    </footer>
+<footer style="text-align: center; padding: 10px; font-size: 0.8em; color: #666;">
+    <p>Last updated: {{ site.time | date: "%I:%M %p %Z on %A, %B %d, %Y" }}</p>
+</footer>
     <script>
         function updateTimestamp() {
             const now = new Date();
