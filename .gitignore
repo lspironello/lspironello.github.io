@@ -1,2 +1,28 @@
  
  
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Backup files
+*~
+*.backup
+
+# Bundle
+.bundle/
+vendor/
+
+# Logs and temporary files
+*.log
+*.txt
+cache.json
+
+# Debug directories
+_debug/
+backup/
+
+# IDE
+.vscode/
+.idea/
