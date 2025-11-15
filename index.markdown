@@ -1,12 +1,15 @@
 ---
 layout: default
-title: Home
 ---
+# Welcome to My Portfolio
 
-# Welcome to lspironello.github.io
-
-This site showcases my professional profile, certificates, and projects.
+Explore my professional journey and certifications.
 
 - [LinkedIn Profile](https://www.linkedin.com/in/lspironello)
-- [Full Profile](/profile)
-- [Certificates (1,000+)](/certs)
+- [Profile](/profile/)
+- [Certificates](/certs/)
+- [Skills](/skills/)
+
+---
+
+*Last updated: {{ site.time | date: "%B %d, %Y" }}*
