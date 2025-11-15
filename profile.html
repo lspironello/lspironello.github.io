@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Professional Profile
 permalink: /profile/
 ---
 <h1>Lou Spironello</h1>
@@ -12,8 +13,12 @@ permalink: /profile/
 <p><strong>Current Focus:</strong> AI Product Security, Secure Architecture, Deployment, and Infrastructure.</p>
 <p><strong>Skills:</strong></p>
 <ul>
-{% for skill in site.data.skills %}
-  <li>{{ skill }}</li>
+{% for skill_item in site.data.skills %}
+  {% if skill_item.Skill %}
+    <li>{{ skill_item.Skill }}</li>
+  {% elsif skill_item %}
+    <li>{{ skill_item }}</li>
+  {% endif %}
 {% endfor %}
 </ul>
 <p><strong>Education & Training:</strong> Extensive LinkedIn Learning (1,700+ courses), DeepLearning.AI specializations.</p>
