@@ -7,3 +7,14 @@ include:
   - assets
   - assets/pdfs
 
+
+# Site settings
+title: Lou Spironello
+description: Professional portfolio and certifications
+
+# Use HTML files as pages
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
