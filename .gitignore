@@ -26,3 +26,4 @@ backup/
 # IDE
 .vscode/
 .idea/
+li_extract.py
