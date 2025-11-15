@@ -1,36 +1,16 @@
 ---
-layout: null
+layout: default
+title: Skills
 permalink: /skills/
 ---
 <h1>Skills</h1>
 <p>Skills acquired from LinkedIn Learning and other certifications.</p>
 
 <ul>
-{% assign skills = site.data.skills | sort %}
-{% assign per_page = 10 %}
-{% assign page = site.paginate | default: 1 %}
-{% assign start_index = page | minus: 1 | times: per_page %}
-{% assign end_index = start_index | plus: per_page %}
-{% for skill in skills | slice: start_index, per_page %}
+{% for skill in site.data.skills %}
   <li>{{ skill }}</li>
 {% endfor %}
 </ul>
-
-<!-- Pagination links -->
-{% assign total_pages = skills.size | divided_by: per_page | plus: 1 %}
-<div class="pagination">
-  {% if page > 1 %}
-    <a href="/skills/?page={{ page | minus: 1 }}">Previous</a>
-  {% else %}
-    <span>Previous</span>
-  {% endif %}
-  <span>Page: {{ page }} of {{ total_pages }}</span>
-  {% if end_index < skills.size %}
-    <a href="/skills/?page={{ page | plus: 1 }}">Next</a>
-  {% else %}
-    <span>Next</span>
-  {% endif %}
-</div>
 
 <footer style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #ccc; font-size: 0.9em; color: #666;">
   <p>Last updated: {{ site.time | date: "%B %d, %Y" }}</p>
