@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Certificates
 permalink: /certs/
 ---
 <h1>My Certificates</h1>
@@ -9,8 +10,12 @@ permalink: /certs/
 <input type="text" id="searchInput" placeholder="Search by title or skill..." style="width: 100%; padding: 8px;">
 <select id="skillFilter" onchange="filterAndPaginateCerts()">
   <option value="">All Skills</option>
-  {% for skill in site.data.skills %}
-    <option value="{{ skill }}">{{ skill }}</option>
+  {% for skill_item in site.data.skills %}
+    {% if skill_item.Skill %}
+      <option value="{{ skill_item.Skill }}">{{ skill_item.Skill }}</option>
+    {% elsif skill_item %}
+      <option value="{{ skill_item }}">{{ skill_item }}</option>
+    {% endif %}
   {% endfor %}
 </select>
 <select id="yearFilter" onchange="filterAndPaginateCerts()">
@@ -48,20 +53,17 @@ permalink: /certs/
 <script>
 const perPage = 10;
 
-// Get current page from URL query param (default to 1)
 function getCurrentPage() {
   const urlParams = new URLSearchParams(window.location.search);
   return parseInt(urlParams.get('page')) || 1;
 }
 
-// Update URL with new page without reloading
 function updateUrl(page) {
   const url = new URL(window.location);
   url.searchParams.set('page', page);
   window.history.pushState({}, '', url);
 }
 
-// Filter certs based on search, skill, and year
 function filterCerts() {
   const searchInput = document.getElementById('searchInput').value.toLowerCase();
   const skillFilter = document.getElementById('skillFilter').value.toLowerCase();
@@ -85,19 +87,16 @@ function filterCerts() {
   return visibleCerts;
 }
 
-// Paginate the visible certs
 function paginateCerts(visibleCerts, currentPage) {
   const totalCerts = visibleCerts.length;
   const totalPages = Math.ceil(totalCerts / perPage);
   const startIndex = (currentPage - 1) * perPage;
   const endIndex = startIndex + perPage;
 
-  // Hide all, then show only the current page's
   visibleCerts.forEach((cert, index) => {
     cert.style.display = (index >= startIndex && index < endIndex) ? '' : 'none';
   });
 
-  // Update pagination HTML
   const paginationHtml = `
     ${currentPage > 1 ? `<a href="?page=${currentPage - 1}" onclick="handlePageChange(${currentPage - 1}); return false;">Previous</a>` : '<span>Previous</span>'}
     <span>Page: ${currentPage} of ${totalPages}</span>
@@ -109,26 +108,21 @@ function paginateCerts(visibleCerts, currentPage) {
   return totalPages;
 }
 
-// Handle page change without reload
 function handlePageChange(newPage) {
   updateUrl(newPage);
   filterAndPaginateCerts();
 }
 
-// Combined filter and paginate
 function filterAndPaginateCerts() {
   const visibleCerts = filterCerts();
   const currentPage = getCurrentPage();
   paginateCerts(visibleCerts, currentPage);
 }
 
-// Initial load
 window.addEventListener('load', filterAndPaginateCerts);
 document.getElementById('searchInput').addEventListener('input', filterAndPaginateCerts);
 document.getElementById('skillFilter').addEventListener('change', filterAndPaginateCerts);
 document.getElementById('yearFilter').addEventListener('change', filterAndPaginateCerts);
-
-// Handle browser back/forward
 window.addEventListener('popstate', filterAndPaginateCerts);
 </script>
 

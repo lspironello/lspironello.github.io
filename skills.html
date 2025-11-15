@@ -7,8 +7,12 @@ permalink: /skills/
 <p>Skills acquired from LinkedIn Learning and other certifications.</p>
 
 <ul>
-{% for skill in site.data.skills %}
-  <li>{{ skill }}</li>
+{% for skill_item in site.data.skills %}
+  {% if skill_item.Skill %}
+    <li>{{ skill_item.Skill }}</li>
+  {% elsif skill_item %}
+    <li>{{ skill_item }}</li>
+  {% endif %}
 {% endfor %}
 </ul>
 
